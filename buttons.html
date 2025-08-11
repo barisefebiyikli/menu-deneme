@@ -1,0 +1,140 @@
+<!--
+  Cafe QR Menu - tek dosyalık örnek (index.html)
+  İçindekiler:
+  - Responsive, mobil-öncelikli HTML + CSS
+  - Basit erişilebilir menü bölümleri
+  - QR kodu için örnek <img> embed (deploy sonrası URL ile güncelle)
+
+  Deploy notları (kısa):
+  - Bu dosyayı index.html olarak repo'na koy, GitHub/Netlify/Cloudflare Pages ile deploy et.
+  - Eğer GitHub Pages kullanacaksan Settings > Pages > Custom domain kısmına domainini yaz.
+  - Apex domain için A kayıtlarını; www gibi subdomain için CNAME kaydını DNS sağlayıcına ekle.
+-->
+
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cafe Örnek Menü</title>
+  <meta name="description" content="Kafenin QR menüsü — mobil için optimize edildi" />
+  <style>
+    :root{
+      --bg:#fff; --card:#f8f8f8; --accent:#b33; --muted:#666; --radius:12px; --max-width:980px;
+      --gap:14px; font-family: Inter,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fff 60%);color:#111;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max-width);margin:18px auto;padding:16px}
+    header{display:flex;gap:12px;align-items:center}
+    .brand{display:flex;flex-direction:column}
+    h1{margin:0;font-size:1.25rem}
+    p.lead{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
+
+    .meta{margin-left:auto;text-align:right}
+    .meta a{display:inline-block;margin-left:8px;padding:8px 12px;border-radius:10px;text-decoration:none;border:1px solid #eee}
+
+    .hero{margin-top:14px;background:var(--card);padding:12px;border-radius:14px;display:flex;gap:12px;align-items:center}
+    .qr{width:110px;height:110px;flex:0 0 110px;border-radius:8px;overflow:hidden;background:#fff;padding:6px}
+    .qr img{width:100%;height:100%;object-fit:contain;display:block}
+    .hero-info{flex:1}
+
+    nav.tabs{display:flex;gap:8px;margin:12px 0;overflow:auto}
+    nav.tabs button{border:0;background:#f1f1f1;padding:8px 12px;border-radius:999px;cursor:pointer}
+
+    .menu{display:grid;grid-template-columns:repeat(1,1fr);gap:var(--gap);margin-top:12px}
+    .section{background:var(--card);padding:12px;border-radius:12px}
+    .section h2{margin:0 0 8px;font-size:1.05rem}
+    .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:10px}
+    .item{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:10px}
+    .item .name{font-weight:600}
+    .price{margin-left:auto;font-weight:700}
+
+    footer{margin:22px 0 60px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* responsive */
+    @media(min-width:640px){
+      .menu{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media(min-width:1000px){
+      .menu{grid-template-columns:repeat(3,1fr)}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+
+    /* print-friendly */
+    @media print{
+      header, nav, .meta, footer{display:none}
+      body{background:#fff}
+      .wrap{padding:0}
+    }
+
+    /* small helpers */
+    .muted{color:var(--muted);font-size:0.95rem}
+    .pill{background:#fff;padding:6px 8px;border-radius:8px;border:1px solid #eee}
+    .order{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <h1>AZURE • MENÜ</h1>
+        <p class="lead">Günlük taze kahveler, atıştırmalıklar ve tatlılar</p>
+      </div>
+      <div class="meta">
+        <div class="pill">Açık: 09:00 - 22:00</div>
+        <div style="margin-top:8px">Tel: <a href="tel:+905555555555">+90 555 555 55 55</a></div>
+      </div>
+    </header>
+
+    <nav class="tabs" aria-label="Menü bölümleri">
+      <button onclick="scrollToSection('coffee')">Kahveler</button>
+      <button onclick="scrollToSection('snacks')">Atıştırmalıklar</button>
+      <button onclick="scrollToSection('drinks')">İçecekler</button>
+    </nav>
+
+    <main class="menu">
+      <article class="section" id="coffee">
+        <h2>Kahveler</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Espresso</div><div class="muted">Tek shot, yoğun</div></div><div class="price">25₺</div></div>
+          <div class="item"><div><div class="name">Latte</div><div class="muted">Sütlü, kremamsı</div></div><div class="price">32₺</div></div>
+          <div class="item"><div><div class="name">Americano</div><div class="muted">Sıcak su ile shot</div></div><div class="price">27₺</div></div>
+          <div class="item"><div><div class="name">Cappuccino</div><div class="muted">Espresso + köpük</div></div><div class="price">33₺</div></div>
+        </div>
+      </article>
+
+      <article class="section" id="snacks">
+        <h2>Atıştırmalıklar</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Croissant</div><div class="muted">Tereyağlı</div></div><div class="price">18₺</div></div>
+          <div class="item"><div><div class="name">Pasta Dilimi</div><div class="muted">Günün pastası</div></div><div class="price">30₺</div></div>
+        </div>
+      </article>
+
+      <article class="section" id="drinks">
+        <h2>Soğuk İçecekler</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Soğuk Demleme</div><div class="muted">Buzlu, yumuşak</div></div><div class="price">28₺</div></div>
+          <div class="item"><div><div class="name">Limonata</div><div class="muted">Ev yapımı</div></div><div class="price">20₺</div></div>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      Menü ürün tavsiyesi için: <a href="mailto:info@kafeornek.com">info@azurekafe.com</a>
+    </footer>
+  </div>
+
+  <script>
+    function scrollToSection(id){
+      document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+    }
+
+    // İsterseniz QR görselini dinamik olarak burada güncelleyebilirsiniz (örnek):
+    // document.querySelector('#qrBox img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(location.href)
+  </script>
+</body>
+</html>
