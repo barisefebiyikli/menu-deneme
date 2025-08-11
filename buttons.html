@@ -1,55 +1,44 @@
-<!--
-  Cafe QR Menu - tek dosyalık örnek (index.html)
-  İçindekiler:
-  - Responsive, mobil-öncelikli HTML + CSS
-  - Basit erişilebilir menü bölümleri
-  - QR kodu için örnek <img> embed (deploy sonrası URL ile güncelle)
-
-  Deploy notları (kısa):
-  - Bu dosyayı index.html olarak repo'na koy, GitHub/Netlify/Cloudflare Pages ile deploy et.
-  - Eğer GitHub Pages kullanacaksan Settings > Pages > Custom domain kısmına domainini yaz.
-  - Apex domain için A kayıtlarını; www gibi subdomain için CNAME kaydını DNS sağlayıcına ekle.
--->
-
 <!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cafe Örnek Menü</title>
-  <meta name="description" content="Kafenin QR menüsü — mobil için optimize edildi" />
+  <title>AZURE • MENÜ</title>
+  <meta name="description" content="Azure Cafe QR Menü — Mobil uyumlu, tüm kategoriler" />
   <style>
     :root{
-      --bg:#fff; --card:#f8f8f8; --accent:#b33; --muted:#666; --radius:12px; --max-width:980px;
+      --bg:#fff; --card:#fbfbfb; --accent:#0a66c2; --muted:#666; --radius:12px; --max-width:1100px;
       --gap:14px; font-family: Inter,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans",sans-serif;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fff 60%);color:#111;-webkit-font-smoothing:antialiased}
-    .wrap{max-width:var(--max-width);margin:18px auto;padding:16px}
+    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fcfcfd 100%);color:#111;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--max-width);margin:12px auto;padding:12px}
     header{display:flex;gap:12px;align-items:center}
     .brand{display:flex;flex-direction:column}
-    h1{margin:0;font-size:1.25rem}
+    h1{margin:0;font-size:1.4rem}
     p.lead{margin:4px 0 0;color:var(--muted);font-size:0.95rem}
 
     .meta{margin-left:auto;text-align:right}
     .meta a{display:inline-block;margin-left:8px;padding:8px 12px;border-radius:10px;text-decoration:none;border:1px solid #eee}
 
     .hero{margin-top:14px;background:var(--card);padding:12px;border-radius:14px;display:flex;gap:12px;align-items:center}
-    .qr{width:110px;height:110px;flex:0 0 110px;border-radius:8px;overflow:hidden;background:#fff;padding:6px}
-    .qr img{width:100%;height:100%;object-fit:contain;display:block}
+    .qr{width:100px;height:100px;flex:0 0 100px;border-radius:8px;overflow:hidden;background:#fff;padding:6px;display:flex;align-items:center;justify-content:center;border:1px solid #eee}
     .hero-info{flex:1}
 
-    nav.tabs{display:flex;gap:8px;margin:12px 0;overflow:auto}
-    nav.tabs button{border:0;background:#f1f1f1;padding:8px 12px;border-radius:999px;cursor:pointer}
+    nav.tabs{display:flex;gap:8px;margin:12px 0;overflow:auto;padding-bottom:6px}
+    nav.tabs button{border:0;background:#f1f1f1;padding:8px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;font-size:0.95rem}
+    nav.tabs button:hover{transform:translateY(-2px)}
 
     .menu{display:grid;grid-template-columns:repeat(1,1fr);gap:var(--gap);margin-top:12px}
-    .section{background:var(--card);padding:12px;border-radius:12px}
-    .section h2{margin:0 0 8px;font-size:1.05rem}
-    .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:10px}
-    .item{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:10px}
+    .section{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,0.03)}
+    .section h2{margin:0 0 8px;font-size:1.05rem;border-bottom:1px dashed #e6e6e6;padding-bottom:8px}
+    .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:8px}
+    .item{display:flex;gap:12px;align-items:flex-start;padding:10px;border-radius:10px}
     .item .name{font-weight:600}
-    .price{margin-left:auto;font-weight:700}
+    .muted{color:var(--muted);font-size:0.95rem}
+    .desc{font-size:0.95rem;color:var(--muted);margin-top:4px}
+    .price{margin-left:auto;font-weight:700;white-space:nowrap}
 
     footer{margin:22px 0 60px;color:var(--muted);font-size:0.9rem;text-align:center}
 
@@ -63,17 +52,12 @@
       .grid{grid-template-columns:repeat(2,1fr)}
     }
 
-    /* print-friendly */
-    @media print{
-      header, nav, .meta, footer{display:none}
-      body{background:#fff}
-      .wrap{padding:0}
-    }
-
-    /* small helpers */
-    .muted{color:var(--muted);font-size:0.95rem}
-    .pill{background:#fff;padding:6px 8px;border-radius:8px;border:1px solid #eee}
-    .order{background:var(--accent);color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none}
+    /* helpers */
+    .badge{background:#fff;padding:6px 8px;border-radius:8px;border:1px solid #eee}
+    .section .note{font-size:0.92rem;color:var(--muted);margin-top:8px}
+    .flavors{font-size:0.95rem;color:var(--muted);margin-top:6px}
+    .small{font-size:0.9rem;color:var(--muted)}
+    .spaced{margin-top:10px}
   </style>
 </head>
 <body>
@@ -81,60 +65,437 @@
     <header>
       <div class="brand">
         <h1>AZURE • MENÜ</h1>
-        <p class="lead">Günlük taze kahveler, atıştırmalıklar ve tatlılar</p>
+        <p class="lead">Tam liste — tüm kategoriler ve fiyatlar birebir</p>
       </div>
       <div class="meta">
-        <div class="pill">Açık: 09:00 - 22:00</div>
-        <div style="margin-top:8px">Tel: <a href="tel:+905555555555">+90 555 555 55 55</a></div>
+        <div class="badge">QR ile açıldıysa menü güncel</div>
       </div>
     </header>
 
+    <div class="hero" role="region" aria-label="Menü bilgileri">
+      <div class="qr" id="qrBox">
+        <!-- QR placeholder - deploy sonrası URL ile değiştirebilirsin -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=azure-menu" alt="QR">
+      </div>
+      <div class="hero-info">
+        <div style="font-weight:700">Azure Cafe</div>
+        <div class="muted">Klasik & Special shisha, kahveler, içecekler ve atıştırmalıklar</div>
+      </div>
+    </div>
+
     <nav class="tabs" aria-label="Menü bölümleri">
-      <button onclick="scrollToSection('coffee')">Kahveler</button>
-      <button onclick="scrollToSection('snacks')">Atıştırmalıklar</button>
-      <button onclick="scrollToSection('drinks')">İçecekler</button>
+      <button onclick="scrollToSection('klasik')">Klasik Tatlar</button>
+      <button onclick="scrollToSection('azure')">Azure Special</button>
+      <button onclick="scrollToSection('premium')">Premium Shisha</button>
+      <button onclick="scrollToSection('dark')">Dark Special</button>
+      <button onclick="scrollToSection('kahveler')">Kahveler / Coffee</button>
+      <button onclick="scrollToSection('caylar')">Çaylar / Tea</button>
+      <button onclick="scrollToSection('biralar')">Biralar / Beers</button>
+      <button onclick="scrollToSection('alkolsuzkok')">Alkolsüz Kokteyl</button>
+      <button onclick="scrollToSection('kokteyller')">Kokteyller</button>
+      <button onclick="scrollToSection('frozen')">Frozen / Milkshake</button>
+      <button onclick="scrollToSection('soft')">Meşrubat / Soft Drinks</button>
+      <button onclick="scrollToSection('alkoller')">Alkoller</button>
+      <button onclick="scrollToSection('sise')">Şişeler / Bottles</button>
+      <button onclick="scrollToSection('internationals')">International Cocktails</button>
+      <button onclick="scrollToSection('shots')">Shot / Shots</button>
+      <button onclick="scrollToSection('wine')">Şaraplar / Wines</button>
+      <button onclick="scrollToSection('starters')">Atıştırmalıklar</button>
+      <button onclick="scrollToSection('burgers')">Burgerler</button>
+      <button onclick="scrollToSection('wraps')">Dürüm / Wraps</button>
+      <button onclick="scrollToSection('pastas')">Makarnalar</button>
+      <button onclick="scrollToSection('salads')">Salatalar</button>
+      <button onclick="scrollToSection('desserts')">Tatlılar</button>
     </nav>
 
-    <main class="menu">
-      <article class="section" id="coffee">
-        <h2>Kahveler</h2>
+    <main class="menu" id="menu">
+
+      <!-- Klasik Tatlar -->
+      <article class="section" id="klasik">
+        <h2>Klasik Tatlar</h2>
         <div class="grid">
-          <div class="item"><div><div class="name">Espresso</div><div class="muted">Tek shot, yoğun</div></div><div class="price">25₺</div></div>
-          <div class="item"><div><div class="name">Latte</div><div class="muted">Sütlü, kremamsı</div></div><div class="price">32₺</div></div>
-          <div class="item"><div><div class="name">Americano</div><div class="muted">Sıcak su ile shot</div></div><div class="price">27₺</div></div>
-          <div class="item"><div><div class="name">Cappuccino</div><div class="muted">Espresso + köpük</div></div><div class="price">33₺</div></div>
+          <div class="item"><div><div class="name">Blue Flash</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Dejavu</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Falım</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Ice Kola</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Lady Killer</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Love 66</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Napoli</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Pineapple Mint</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Pişmiş Şeftali</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Sour Apple Mint</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Al fakher Çift elma</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Türkish Mastic (damla sakız)</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Bisküvi</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Nakhla şeftali</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Nakhla kapıcıno</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Nane</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Kavun</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Pişmiş şeftali</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Karpuz</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Çilek</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Limon</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Bodrum mandalina</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Yaban mersini</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Vişne</div></div><div class="price">800 ₺</div></div>
         </div>
       </article>
 
-      <article class="section" id="snacks">
-        <h2>Atıştırmalıklar</h2>
+      <!-- Azure Special -->
+      <article class="section" id="azure">
+        <h2>Azure Special</h2>
         <div class="grid">
-          <div class="item"><div><div class="name">Croissant</div><div class="muted">Tereyağlı</div></div><div class="price">18₺</div></div>
-          <div class="item"><div><div class="name">Pasta Dilimi</div><div class="muted">Günün pastası</div></div><div class="price">30₺</div></div>
+          <div class="item"><div><div class="name">Bakery mix</div><div class="desc">sütlü kurabiye, bisküvi, kapicino</div></div><div class="price">1,400 ₺</div></div>
+          <div class="item"><div><div class="name">Red dream</div><div class="desc">kırmızı meyve patlaması</div></div><div class="price">1,400 ₺</div></div>
+          <div class="item"><div><div class="name">Unix</div><div class="desc">kavun, krema, vanilya, çikolata, hafif karpuz, nane</div></div><div class="price">1,400 ₺</div></div>
+          <div class="item"><div><div class="name">Citrus mix</div><div class="desc">greyfurt, lime, portakal, krema, nane</div></div><div class="price">1,400 ₺</div></div>
+          <div class="item"><div><div class="name">Momentos kis</div><div class="desc">fresh sakız ferahlığı, sulu yeşil elma</div></div><div class="price">1,400 ₺</div></div>
         </div>
       </article>
 
-      <article class="section" id="drinks">
-        <h2>Soğuk İçecekler</h2>
+      <!-- Premium Shisha -->
+      <article class="section" id="premium">
+        <h2>Premium Shisha</h2>
         <div class="grid">
-          <div class="item"><div><div class="name">Soğuk Demleme</div><div class="muted">Buzlu, yumuşak</div></div><div class="price">28₺</div></div>
-          <div class="item"><div><div class="name">Limonata</div><div class="muted">Ev yapımı</div></div><div class="price">20₺</div></div>
+          <div class="item"><div><div class="name">Abracadabra</div><div class="desc">kavun krema, buz, gizemli tad</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Splash lemon flash</div><div class="desc">sulu tatlı limon, buz</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Ice Kola</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Rio orange flash</div><div class="desc">portakal krema, nane</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Sour apple flash</div><div class="desc">yeşil elma, nane</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Bubble balls</div><div class="desc">tatlı çilekli sakız</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Wildberry flash</div><div class="desc">kırmızı orman meyveleri, nane</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Banana slush</div><div class="desc">tatlı muz</div></div><div class="price">1,000 ₺</div></div>
+          <div class="item"><div><div class="name">Triple grape flash</div><div class="desc">benzersiz üç üzüm ferahlığı</div></div><div class="price">1,000 ₺</div></div>
         </div>
       </article>
+
+      <!-- Dark Special -->
+      <article class="section" id="dark">
+        <h2>Dark Special</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Belgium Waffle</div></div><div class="price">1,200 ₺</div></div>
+          <div class="item"><div><div class="name">Cookie</div></div><div class="price">1,200 ₺</div></div>
+          <div class="item"><div><div class="name">Pineapple Rings</div></div><div class="price">1,200 ₺</div></div>
+          <div class="item"><div><div class="name">Pinkman</div></div><div class="price">1,200 ₺</div></div>
+          <div class="item"><div><div class="name">Süt Buhur</div></div><div class="price">1,200 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Kahveler / Coffee -->
+      <article class="section" id="kahveler">
+        <h2>Kahveler / Coffee</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Americano</div></div><div class="price">280 ₺</div></div>
+          <div class="item"><div><div class="name">Caffe Latte</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Cappuccino</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Espresso (Single)</div></div><div class="price">240 ₺</div></div>
+          <div class="item"><div><div class="name">Espresso (Double)</div></div><div class="price">280 ₺</div></div>
+          <div class="item"><div><div class="name">Mocha</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Macchiato</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Caramel Macchiato</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Türk Kahvesi / Turkish Coffee</div></div><div class="price">180 ₺</div></div>
+          <div class="item"><div><div class="name">D.Türk Kahvesi / D.Turkish Coffee</div></div><div class="price">240 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Çaylar / Tea -->
+      <article class="section" id="caylar">
+        <h2>Çaylar / Tea</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Demleme Çay</div></div><div class="price">100 ₺</div></div>
+          <div class="item"><div><div class="name">Special Çay</div></div><div class="price">150 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Biralar / Beers -->
+      <article class="section" id="biralar">
+        <h2>Biralar / Beers</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Carlsberg</div></div><div class="price">340 ₺</div></div>
+          <div class="item"><div><div class="name">Corona</div></div><div class="price">340 ₺</div></div>
+          <div class="item"><div><div class="name">Efes Malt Filtresiz</div></div><div class="price">320 ₺</div></div>
+          <div class="item"><div><div class="name">Efes Özel Seri</div></div><div class="price">320 ₺</div></div>
+          <div class="item"><div><div class="name">Tuborg</div></div><div class="price">320 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Alkolsüz Kokteyl / Special -->
+      <article class="section" id="alkolsuzkok">
+        <h2>Alkolsüz Kokteyl</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Azure Special (Alkolsüz Kokteyl)</div></div><div class="price">400 ₺</div></div>
+          <div class="item"><div><div class="name">Mojito / Mojito Çilekli</div></div><div class="price">350 ₺</div></div>
+          <div class="item"><div><div class="name">Pina colada</div></div><div class="price">350 ₺</div></div>
+          <div class="item"><div><div class="name">Sex on the beach</div></div><div class="price">350 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Frozen / Milkshake -->
+      <article class="section" id="frozen">
+        <h2>Frozen / Milkshake</h2>
+        <div class="section">
+          <div class="small">Frozen</div>
+          <div class="flavors">Çilek, Karadut, Karpuz, Kavun, Limon, Şeftali</div>
+          <div class="spaced small" style="font-weight:700">450 ₺</div>
+        </div>
+        <div class="spaced"></div>
+        <div class="section">
+          <div class="small">Milkshake</div>
+          <div class="flavors">Çikolatalı, Çilekli, Oreo</div>
+          <div class="spaced small" style="font-weight:700">450 ₺</div>
+        </div>
+      </article>
+
+      <!-- Meşrubat / Soft Drinks -->
+      <article class="section" id="soft">
+        <h2>Meşrubat / Soft Drinks</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Ayran</div></div><div class="price">150 ₺</div></div>
+          <div class="item"><div><div class="name">Yeşil Ayran</div></div><div class="price">150 ₺</div></div>
+          <div class="item"><div><div class="name">Churchill</div></div><div class="price">200 ₺</div></div>
+          <div class="item"><div><div class="name">Azure Churchill</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Coca Cola (Original, Zero, Light)</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Fuse Tea (Şeftali, Limon)</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Fanta</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Sprite</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Limonata</div></div><div class="price">210 ₺</div></div>
+          <div class="item"><div><div class="name">Limonata Special (Çilekli, Naneli)</div></div><div class="price">270 ₺</div></div>
+          <div class="item"><div><div class="name">Redbull (Original, Sugar Free)</div></div><div class="price">280 ₺</div></div>
+          <div class="item"><div><div class="name">Soda</div></div><div class="price">140 ₺</div></div>
+          <div class="item"><div><div class="name">Meyveli Soda</div></div><div class="price">160 ₺</div></div>
+          <div class="item"><div><div class="name">Su</div></div><div class="price">100 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Alkoller / Alcohol -->
+      <article class="section" id="alkoller">
+        <h2>Alkoller / Alcohol</h2>
+        <div class="section small">
+          <div style="font-weight:700">Viski</div>
+          <div class="flavors">Chivas Regal 12yy — (Single) | (Duble) — 800 ₺ | 1,200 ₺</div>
+          <div class="flavors">Chivas Regal 18yy — (Single) | (Duble) — 1,200 ₺ | 1,400 ₺</div>
+          <div style="margin-top:8px;font-weight:700">Jack Daniels</div>
+          <div class="flavors">(Single) | (Duble) — 800 ₺ | 1,200 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Gin / Cin</div>
+          <div class="flavors">(Single) | (Duble) — 450 ₺ | 700 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Malfy</div>
+          <div class="flavors">(Single) | (Duble) — 600 ₺ | 1,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Rom</div>
+          <div class="flavors">(Single) | (Duble) — 450 ₺ | 700 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Likör</div>
+          <div class="flavors">Jagermeister — (Single) 600 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Vodka</div>
+          <div class="flavors">Absolut — (Single) | (Duble) — 450 ₺ | 700 ₺</div>
+          <div class="flavors">Belveder — (Single) | (Duble) — 600 ₺ | 1,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Tequila</div>
+          <div class="flavors">(Single) | (Duble) — 1,000 ₺ | 1,600 ₺</div>
+        </div>
+      </article>
+
+      <!-- Şişeler / Bottles -->
+      <article class="section" id="sise">
+        <h2>Şişeler (Bottles)</h2>
+        <div class="section small">
+          <div style="font-weight:700">Viski</div>
+          <div class="flavors">Chivas Regal 12yy — 35cl(SISE) | 70cl(SISE) — 5,000 ₺ | 8,000 ₺</div>
+          <div class="flavors">Chivas Regal 18yy — 35cl(SISE) | 70cl(SISE) — 0,000 ₺ | 10,000 ₺</div>
+          <div class="flavors">Jack Daniels — 35cl(SISE) | 70cl(SISE) — 0,000 ₺ | 8,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Gin / Cin</div>
+          <div class="flavors">35cl (SISE) | 70cl (SISE) — 0,000 ₺ | 0,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Malfy</div>
+          <div class="flavors">35cl (SISE) | 70cl (SISE) — 0,000 ₺ | 0,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Rom</div>
+          <div class="flavors">35cl (SISE) | 70cl (SISE) — 0,000 ₺ | 0,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Likör</div>
+          <div class="flavors">Jagermeister — 70cl (SISE) — 7,500 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Vodka</div>
+          <div class="flavors">Absolut — 35cl (SISE) | 70cl (SISE) — 4,000 ₺ | 7,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Belvedere</div>
+          <div class="flavors">70cl (SISE) — 10,000 ₺</div>
+
+          <div style="margin-top:10px;font-weight:700">Tequila</div>
+          <div class="flavors">35cl (SISE) | 70cl (SISE) — 4,000 ₺ | 7,000 ₺</div>
+        </div>
+      </article>
+
+      <!-- International Cocktails -->
+      <article class="section" id="internationals">
+        <h2>International Cocktails</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Alkolsüz Kokteyl</div></div><div class="price">350 ₺</div></div>
+          <div class="item"><div><div class="name">Aperol Spritz</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Azure Special</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Blue Hawaii</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Cin Fizz</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Espresso Martini</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Jager Boom</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Long Island Ice Tea</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Kuzu Kulağı</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Lynchburg Lemonade</div></div><div class="price">800 ₺</div></div>
+          <div class="item"><div><div class="name">Mojito</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Pina Colada</div></div><div class="price">650 ₺</div></div>
+          <div class="item"><div><div class="name">Sex on the beach</div></div><div class="price">650 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Shot / Shots -->
+      <article class="section" id="shots">
+        <h2>Shot / Shots</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Jagermaister (SHOT)</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Lemonchello (SHOT)</div></div><div class="price">300 ₺</div></div>
+          <div class="item"><div><div class="name">Tequila (SHOT)</div></div><div class="price">300 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Biralar tekrar (orijinal listede iki kez vardı, birebir korundu) -->
+      <article class="section" id="biralar-2">
+        <h2>Biralar / Beers (Tekrar)</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Carlsberg</div></div><div class="price">340 ₺</div></div>
+          <div class="item"><div><div class="name">Corona</div></div><div class="price">340 ₺</div></div>
+          <div class="item"><div><div class="name">Efes Malt Filtresiz</div></div><div class="price">320 ₺</div></div>
+          <div class="item"><div><div class="name">Efes Özel Seri</div></div><div class="price">320 ₺</div></div>
+          <div class="item"><div><div class="name">Tuborg</div></div><div class="price">320 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Şaraplar / Wines -->
+      <article class="section" id="wine">
+        <h2>Şaraplar / Wines</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Beyaz Kadeh</div></div><div class="price">600 ₺</div></div>
+          <div class="item"><div><div class="name">Blush Kadeh</div></div><div class="price">600 ₺</div></div>
+          <div class="item"><div><div class="name">Kırmızı Kadeh</div></div><div class="price">600 ₺</div></div>
+          <div class="item"><div><div class="name">Angora Beyaz 75cl</div></div><div class="price">3,000 ₺</div></div>
+          <div class="item"><div><div class="name">Angora Blush 75cl</div></div><div class="price">3,000 ₺</div></div>
+          <div class="item"><div><div class="name">Angora Kırmızı 75cl</div></div><div class="price">3,000 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Atıştırmalıklar / Starters -->
+      <article class="section" id="starters">
+        <h2>Atıştırmalıklar / Starters</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Akdeniz Tost</div></div><div class="price">450 ₺</div></div>
+          <div class="item"><div><div class="name">Azure Tost</div></div><div class="price">490 ₺</div></div>
+          <div class="item"><div><div class="name">Kaşarlı/Sucuklu Tost</div></div><div class="price">460 ₺</div></div>
+          <div class="item"><div><div class="name">Ege Tost</div></div><div class="price">480 ₺</div></div>
+          <div class="item"><div><div class="name">Vejeteryan Sandviç</div></div><div class="price">430 ₺</div></div>
+          <div class="item"><div><div class="name">Acılı Çıtır Tavuk</div></div><div class="price">590 ₺</div></div>
+          <div class="item"><div><div class="name">Bira Tabağı</div></div><div class="price">590 ₺</div></div>
+          <div class="item"><div><div class="name">Peynir Tabağı</div></div><div class="price">590 ₺</div></div>
+          <div class="item"><div><div class="name">Parmak Patates</div></div><div class="price">390 ₺</div></div>
+          <div class="item"><div><div class="name">Elma Dilim Patates</div></div><div class="price">410 ₺</div></div>
+          <div class="item"><div><div class="name">Krudite</div></div><div class="price">380 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Burgerler / Burgers -->
+      <article class="section" id="burgers">
+        <h2>Burgerler / Burgers</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Füme Burger</div></div><div class="price">750 ₺</div></div>
+          <div class="item"><div><div class="name">Big Burger</div></div><div class="price">750 ₺</div></div>
+          <div class="item"><div><div class="name">Mexican Burger</div></div><div class="price">750 ₺</div></div>
+          <div class="item"><div><div class="name">Cheese Burger</div></div><div class="price">740 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Dürüm / Wraps -->
+      <article class="section" id="wraps">
+        <h2>Dürüm / Wraps</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Tavuklu Wrap</div></div><div class="price">680 ₺</div></div>
+          <div class="item"><div><div class="name">Köfte Wrap</div></div><div class="price">730 ₺</div></div>
+          <div class="item"><div><div class="name">Taco</div></div><div class="price">680 ₺</div></div>
+          <div class="item"><div><div class="name">Mexican Taco</div></div><div class="price">680 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Makarnalar / Pastas -->
+      <article class="section" id="pastas">
+        <h2>Makarnalar / Pastas</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Penne Arabiatta</div></div><div class="price">620 ₺</div></div>
+          <div class="item"><div><div class="name">Pesto Soslu Penne / Fettucini</div></div><div class="price">620 ₺</div></div>
+          <div class="item"><div><div class="name">Fettucini Alfredo</div></div><div class="price">620 ₺</div></div>
+          <div class="item"><div><div class="name">Carbonara</div></div><div class="price">620 ₺</div></div>
+          <div class="item"><div><div class="name">Spagetti Bolonez</div></div><div class="price">620 ₺</div></div>
+          <div class="item"><div><div class="name">Krema Mantarlı</div></div><div class="price">620 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Salata / Salads -->
+      <article class="section" id="salads">
+        <h2>Salata / Salads</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Avakado Salata</div></div><div class="price">550 ₺</div></div>
+          <div class="item"><div><div class="name">İzmir Tulum Salata</div></div><div class="price">560 ₺</div></div>
+          <div class="item"><div><div class="name">Sezar Salata</div></div><div class="price">540 ₺</div></div>
+          <div class="item"><div><div class="name">Aresto</div></div><div class="price">690 ₺</div></div>
+          <div class="item"><div><div class="name">Rucola Salata</div></div><div class="price">550 ₺</div></div>
+        </div>
+      </article>
+
+      <!-- Tatlılar / Dessert -->
+      <article class="section" id="desserts">
+        <h2>Tatlılar / Dessert</h2>
+        <div class="grid">
+          <div class="item"><div><div class="name">Kaymaklı Kadayıf</div></div><div class="price">340 ₺</div></div>
+          <div class="item"><div><div class="name">Munchies</div></div><div class="price">390 ₺</div></div>
+          <div class="item"><div><div class="name">Sütlaç</div></div><div class="price">290 ₺</div></div>
+          <div class="item"><div><div class="name">Meyve Tabağı</div></div><div class="price">600 ₺</div></div>
+        </div>
+      </article>
+
     </main>
 
     <footer>
-      Menü ürün tavsiyesi için: <a href="mailto:info@kafeornek.com">info@azurekafe.com</a>
+      Menü ile ilgili güncelleme / öneri için: <a href="mailto:info@azurekafe.com">info@azurekafe.com</a>
     </footer>
   </div>
 
   <script>
     function scrollToSection(id){
-      document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+      const el = document.getElementById(id);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
     }
 
-    // İsterseniz QR görselini dinamik olarak burada güncelleyebilirsiniz (örnek):
-    // document.querySelector('#qrBox img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(location.href)
+    // small enhancement: highlight current tab based on scroll
+    const tabs = Array.from(document.querySelectorAll('nav.tabs button'));
+    const sections = tabs.map(btn => {
+      const id = btn.getAttribute('onclick')?.match(/'(.+)'/)?.[1];
+      return id ? document.getElementById(id) : null;
+    });
+
+    window.addEventListener('scroll', () => {
+      let found = null;
+      for(let i=0;i<sections.length;i++){
+        const s = sections[i];
+        if(!s) continue;
+        const rect = s.getBoundingClientRect();
+        if(rect.top <= 120 && rect.bottom > 120){
+          found = i; break;
+        }
+      }
+      tabs.forEach((t,idx) => t.style.boxShadow = (idx===found) ? '0 2px 8px rgba(0,0,0,0.08)' : 'none');
+    });
+
+    // QR image placeholder generator (optional)
+    // document.querySelector('#qrBox img').src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(location.href);
   </script>
 </body>
 </html>
